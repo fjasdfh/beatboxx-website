@@ -82,9 +82,9 @@ You have several options to upload your website:
 
 #### Option A: Using Git (Recommended)
 ```bash
-# Clone your repository (if you have it on GitHub)
+# Clone your repository
 cd /home/beatboxx
-git clone https://github.com/YOUR_USERNAME/beatboxx-website.git
+git clone https://github.com/fjasdfh/beatboxx-website.git
 cd beatboxx-website
 ```
 
