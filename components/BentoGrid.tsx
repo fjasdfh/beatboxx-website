@@ -102,20 +102,6 @@ const bentoItems = [
         ))}
       </div>
     )
-  },
-  {
-    title: "100% Private",
-    description: "Your data never leaves your device",
-    icon: <Lock className="w-6 h-6" />,
-    gradient: "from-gray-500/20 to-gray-600/20",
-    demo: (
-      <div className="mt-4 text-center">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-800/20">
-          <Lock className="w-8 h-8 text-gray-300" />
-        </div>
-        <div className="mt-2 text-xs text-gray-500">On-Device Only</div>
-      </div>
-    )
   }
 ]
 
@@ -169,7 +155,7 @@ export default function BentoGrid() {
               {/* Content */}
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-3 sm:mb-4">
-                  <div className="p-2 rounded-lg bg-white/20 dark:bg-white/10 text-white group-hover:scale-110 transition-transform">
+                  <div className="p-2 rounded-lg bg-white/20 dark:bg-white/10 text-green-500 group-hover:scale-110 transition-transform">
                     {item.icon}
                   </div>
                   <motion.div

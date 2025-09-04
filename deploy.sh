@@ -6,9 +6,9 @@
 set -e
 
 # Configuration (EDIT THESE VALUES)
-VPS_IP="YOUR_VPS_IP"
+VPS_IP="82.165.92.234"
 VPS_USER="beatboxx"
-DOMAIN="YOUR_DOMAIN.com"
+DOMAIN="beatboxx.app"
 PROJECT_DIR="/home/beatboxx/beatboxx-website"
 
 # Colors for output
