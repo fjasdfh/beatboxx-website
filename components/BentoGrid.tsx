@@ -123,30 +123,31 @@ export default function BentoGrid() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8">
+    <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-primary-light/3 to-background">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-light/10 border border-primary-light/20 backdrop-blur-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary-light/10 border border-primary-light/20 backdrop-blur-sm mb-4">
             <Wand2 className="w-4 h-4 text-primary animate-pulse" />
-            <span className="text-sm font-medium">Powerful Features</span>
+            <span className="text-xs sm:text-sm font-medium">Powerful Features</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-display font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4 px-4">
             Everything You Need to <span className="gradient-text">Win</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Professional tools designed for serious beatboxers
           </p>
         </motion.div>
 
+        {/* Mobile-optimized grid */}
         <div
           ref={ref}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
         >
           {bentoItems.map((item, index) => (
             <motion.div
@@ -154,21 +155,21 @@ export default function BentoGrid() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`group relative p-6 rounded-2xl overflow-hidden ${item.className || ''}`}
+              className={`group relative p-4 sm:p-6 rounded-xl sm:rounded-2xl overflow-hidden ${item.className || ''}`}
             >
               {/* Background gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-50 group-hover:opacity-70 transition-opacity`} />
               
               {/* Glass effect */}
-              <div className="absolute inset-0 backdrop-blur-sm bg-white/5" />
+              <div className="absolute inset-0 backdrop-blur-sm bg-white/10 dark:bg-white/5" />
               
               {/* Border */}
-              <div className="absolute inset-0 rounded-2xl border border-white/10 group-hover:border-white/20 transition-colors" />
+              <div className="absolute inset-0 rounded-xl sm:rounded-2xl border border-white/20 dark:border-white/10 group-hover:border-white/30 transition-colors" />
               
               {/* Content */}
               <div className="relative z-10">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="p-2 rounded-lg bg-white/10 text-white/80 group-hover:scale-110 transition-transform">
+                <div className="flex items-start justify-between mb-3 sm:mb-4">
+                  <div className="p-2 rounded-lg bg-white/20 dark:bg-white/10 text-white group-hover:scale-110 transition-transform">
                     {item.icon}
                   </div>
                   <motion.div
@@ -180,11 +181,11 @@ export default function BentoGrid() {
                   </motion.div>
                 </div>
                 
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-foreground">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
                 
                 {item.demo && (
-                  <div className="mt-4">
+                  <div className="mt-3 sm:mt-4">
                     {item.demo}
                   </div>
                 )}
@@ -193,7 +194,7 @@ export default function BentoGrid() {
               {/* Hover effect */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-primary-light/0 to-accent-vibrant/0 opacity-0 group-hover:opacity-20 transition-opacity pointer-events-none"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.02 }}
               />
             </motion.div>
           ))}
