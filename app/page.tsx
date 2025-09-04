@@ -128,11 +128,11 @@ export default function HomePage() {
               className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
             >
               <AnimatedButton href="#" size="lg" variant="primary">
-                <Download className="w-5 h-5 mr-2" />
+                <Download className="w-5 h-5 shrink-0 align-middle" />
                 Download for iOS
               </AnimatedButton>
               <AnimatedButton href="#" size="lg" variant="secondary">
-                <Download className="w-5 h-5 mr-2" />
+                <Download className="w-5 h-5 shrink-0 align-middle" />
                 Download for Android
               </AnimatedButton>
             </motion.div>
@@ -508,11 +508,11 @@ function FinalCTA() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <AnimatedButton href="#" size="lg" variant="primary">
-            <Smartphone className="w-5 h-5 mr-2" />
+            <Smartphone className="w-5 h-5 shrink-0 align-middle" />
             Get Beatboxx Free
           </AnimatedButton>
           <AnimatedButton href="https://www.instagram.com/beatboxxapp/" size="lg" variant="ghost" external>
-            <Instagram className="w-5 h-5 mr-2" />
+            <Instagram className="w-5 h-5 shrink-0 align-middle" />
             Follow Updates
           </AnimatedButton>
         </div>

@@ -158,7 +158,7 @@ export default function AppShowcase() {
                   rotate: [-5, -8, -5]
                 }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute top-8 -left-20 w-48 opacity-20"
+                className="hidden md:block absolute top-8 -left-20 w-48 opacity-20"
               >
                 <PhoneFrame small>
                   <div className="aspect-[9/19.5] bg-gradient-to-br from-primary-light/20 to-accent/20" />
@@ -172,7 +172,7 @@ export default function AppShowcase() {
                   rotate: [5, 8, 5]
                 }}
                 transition={{ duration: 5, repeat: Infinity }}
-                className="absolute top-8 -right-20 w-48 opacity-20"
+                className="hidden md:block absolute top-8 -right-20 w-48 opacity-20"
               >
                 <PhoneFrame small>
                   <div className="aspect-[9/19.5] bg-gradient-to-br from-accent/20 to-primary-light/20" />
