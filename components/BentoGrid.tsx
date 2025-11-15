@@ -21,7 +21,6 @@ import {
   Smartphone,
   Download,
   Wand2,
-  Timer,
   Trophy
 } from 'lucide-react'
 import Image from 'next/image'
@@ -44,24 +43,6 @@ const bentoItems = [
             {tag}
           </motion.span>
         ))}
-      </div>
-    )
-  },
-  {
-    title: "Battle Timer",
-    description: "Practice with real battle timings",
-    icon: <Timer className="w-6 h-6" />,
-    gradient: "from-blue-500/20 to-cyan-500/20",
-    demo: (
-      <div className="mt-4">
-        <div className="text-3xl font-bold font-mono text-center">1:30</div>
-        <div className="w-full h-2 bg-gray-300 rounded-full mt-2 overflow-hidden">
-          <motion.div
-            className="h-full bg-gradient-to-r from-primary to-accent-vibrant"
-            animate={{ width: ['0%', '100%'] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          />
-        </div>
       </div>
     )
   },
