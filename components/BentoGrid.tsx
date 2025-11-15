@@ -66,18 +66,30 @@ const bentoItems = [
     )
   },
   {
-    title: "Quick Recording",
-    description: "One-tap recording with auto-save",
+    title: "Pro Recording Tools",
+    description: "Stay on beat with a metronome, record in the background, trim waveforms, and rename takes fast.",
     icon: <Mic2 className="w-6 h-6" />,
     gradient: "from-red-500/20 to-orange-500/20",
     demo: (
-      <motion.div
-        className="mt-4 w-20 h-20 mx-auto rounded-full bg-red-500 flex items-center justify-center cursor-pointer"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <Mic2 className="w-8 h-8 text-white" />
-      </motion.div>
+      <div className="mt-4 space-y-3">
+        <div>
+          <div className="text-xs font-medium text-muted-foreground mb-1">Metronome</div>
+          <div className="flex items-center gap-2 text-sm">
+            <span className="inline-flex items-center px-2 py-1 rounded-full bg-white/10">BPM 140</span>
+            <span className="inline-flex items-center px-2 py-1 rounded-full bg-white/10">4/4</span>
+          </div>
+        </div>
+        <div>
+          <div className="text-xs font-medium text-muted-foreground mb-1">Waveform Trim</div>
+          <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-primary to-accent-vibrant"
+              animate={{ width: ['30%', '70%', '40%'] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
+          </div>
+        </div>
+      </div>
     )
   },
   {

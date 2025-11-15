@@ -34,9 +34,8 @@ Summary
 - These backups are under your control and subject to Apple or Google’s terms and privacy policies. Beatboxx does not operate any backend servers.
 - When restoring, Beatboxx places your data back into the app so items remain organized as before.
 
-4) Donations and payments
-- Donations or in-app payments are handled by Apple App Store or Google Play. We receive confirmation of payment (e.g., a transaction ID) but not your full payment details.
-- 80% of donations are directed to support the beatbox community (events, judges, venues). Distribution details may evolve, but our intent is community-first.
+4) In-app payments
+- Any in-app payments (for example, optional purchases) are handled by Apple App Store or Google Play. We receive confirmation of payment (e.g., a transaction ID) but not your full payment details.
 
 5) Children’s privacy
 - Beatboxx is not directed to children under 13. We do not knowingly collect personal information from children.

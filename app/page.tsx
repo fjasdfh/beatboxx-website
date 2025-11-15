@@ -29,7 +29,8 @@ import {
   Smartphone,
   Download,
   Instagram,
-  ArrowDown
+  ArrowDown,
+  Trophy
 } from 'lucide-react'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
@@ -159,44 +160,43 @@ export default function HomePage() {
               variants={fadeInUp}
               className="text-base sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto px-4"
             >
-              The first beatbox app built specifically for beatboxers — from beginners to world-stage competitors
+              The first beatbox app built specifically for beatboxers — from beginners to world-stage competitors. Stop losing ideas in Voice Memos and turn every recording into an organized, battle-ready routine.
             </motion.p>
-
-            {/* Stats Row - New addition for credibility */}
-            <motion.div 
-              variants={fadeInUp}
-              className="flex flex-wrap justify-center gap-6 sm:gap-12 pt-4"
-            >
-              {[
-                { value: '10K+', label: 'Beatboxers' },
-                { value: '100K+', label: 'Beats Recorded' },
-                { value: '4.9★', label: 'App Rating' },
-              ].map((stat) => (
-                <motion.div
-                  key={stat.label}
-                  whileHover={{ scale: 1.1 }}
-                  className="text-center"
-                >
-                  <div className="text-2xl sm:text-3xl font-bold gradient-text">{stat.value}</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
 
             {/* CTA Buttons with better mobile layout */}
             <motion.div 
               variants={fadeInUp}
               className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-6 px-4"
             >
-              <AnimatedButton href="https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714" size="lg" variant="primary" className="w-full sm:w-auto" external>
-                <Download className="w-5 h-5 shrink-0" />
-                <span className="ml-2">Download for iOS</span>
-              </AnimatedButton>
-              <AnimatedButton href="https://play.google.com/store/apps/details?id=com.johannes.beatboxx" size="lg" variant="secondary" className="w-full sm:w-auto" external>
+              <AnimatedButton
+                href="https://play.google.com/store/apps/details?id=com.johannes.beatboxx"
+                size="lg"
+                variant="primary"
+                className="w-full sm:w-auto"
+                external
+              >
                 <Download className="w-5 h-5 shrink-0" />
                 <span className="ml-2">Download for Android</span>
               </AnimatedButton>
+              <AnimatedButton
+                href="https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714"
+                size="lg"
+                variant="secondary"
+                className="w-full sm:w-auto"
+                external
+              >
+                <Download className="w-5 h-5 shrink-0" />
+                <span className="ml-2">Download for iOS</span>
+              </AnimatedButton>
             </motion.div>
+
+            {/* Mini line about platforms & free pricing */}
+            <motion.p
+              variants={fadeInUp}
+              className="text-xs sm:text-sm text-muted-foreground pt-2"
+            >
+              Beatboxx is free on Android and iOS.
+            </motion.p>
 
             {/* Social link with hover animation */}
             <motion.div variants={fadeInUp} className="pt-2">
@@ -280,6 +280,66 @@ export default function HomePage() {
         </motion.div>
       </section>
 
+      {/* Who Beatboxx is for */}
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-background/80 relative overflow-hidden">
+        <div className="max-w-5xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <h2 className="text-3xl sm:text-4xl font-display font-bold mb-3">Who Beatboxx is for</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+              Whether you&apos;re learning your first patterns or preparing for world-stage battles, Beatboxx keeps your ideas organized.
+            </p>
+          </motion.div>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="p-6 rounded-2xl bg-white/60 dark:bg-background/60 shadow-sm border border-border-light/60 flex items-start gap-4"
+            >
+              <div className="mt-1 inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-light/30 text-primary">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-base sm:text-lg text-foreground font-semibold mb-1">
+                  If you&apos;re just starting out
+                </p>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  Capture every idea without worrying about file names. Tag by genre like dubstep, drum and bass, or hip hop, and quickly find the beats you want to improve.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="p-6 rounded-2xl bg-white/60 dark:bg-background/60 shadow-sm border border-border-light/60 flex items-start gap-4"
+            >
+              <div className="mt-1 inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-light/30 text-primary">
+                <Trophy className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-base sm:text-lg text-foreground font-semibold mb-1">
+                  If you&apos;re preparing for battles and shows
+                </p>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  Organize routines by battle round—Elim to finals. Structure your material, add backups, and perform with confidence at every stage.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* 3D Phone Showcase - COMMENTED OUT */}
       {/* <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background via-primary-light/5 to-background">
         <div className="max-w-7xl mx-auto">
@@ -312,7 +372,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto relative z-10">
           <FeatureHeader
             title="Why Beatboxx"
-            subtitle="Everything you need to level up your beatbox game"
+            subtitle="Voice Memos just records audio. Beatboxx organizes your beatbox ideas with tags, routines, and battle rounds — all in one place."
           />
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-12 sm:mt-16">
@@ -371,33 +431,28 @@ const features = [
   {
     icon: <Tag className="w-6 h-6" />,
     title: "Smart Tagging",
-    description: "Tag techniques, energy, tempo, mood, and structural sections for instant organization."
+    description: "Tag techniques (like lip rolls and inward bass), energy, tempo, mood, and sections for instant organization."
   },
   {
     icon: <Search className="w-6 h-6" />,
     title: "Powerful Search",
-    description: "Find beats with combinations like 'technical + trap' or 'high-energy hip hop'."
+    description: "Find beats with combinations like 'technical + trap' or 'high-energy hip hop' in seconds."
   },
   {
     icon: <Folder className="w-6 h-6" />,
     title: "Routine Builder",
-    description: "Create genre-based folders, pin best takes, and reorder for perfect flow."
+    description: "Create genre-based folders and reorder sections like Intro, Build-up, and Drop for perfect routine flow."
   },
   {
     icon: <Zap className="w-6 h-6" />,
     title: "Battle Prep",
-    description: "Organize material by round from Elimination to Finals with notes and alternates."
+    description: "Organize material by battle round from Elim to Finals with notes, alternates, and backups."
   },
   {
     icon: <Shield className="w-6 h-6" />,
     title: "100% Private",
     description: "Everything stays on your device. No cloud uploads, no tracking, no account required."
   },
-  {
-    icon: <Heart className="w-6 h-6" />,
-    title: "Community Support",
-    description: "Optional donations with 80% going directly back to the beatbox community."
-  }
 ]
 
 // Feature Card Component
@@ -575,6 +630,10 @@ function TestimonialsSection() {
     {
       quote: "Mate you have no idea how much it will change me and mostly my beginner beatbox friends who also want to beatbox in the high levels.",
       author: "Community Member"
+    },
+    {
+      quote: "This is what you need: If you are a Beatboxer who wants to progress and prepare for battle, show etc. this is the perfect app. A must for every Beatboxer.",
+      author: "Beatboxer"
     }
   ]
 
@@ -697,7 +756,15 @@ function FAQSection() {
     },
     {
       question: "Is Beatboxx free?",
-      answer: "Beatboxx is free. Donations are optional, and 80% goes directly back to the beatbox community (events, judges, venues)."
+      answer: "Yes. Beatboxx is free to download and use on Android and iOS."
+    },
+    {
+      question: "Can I import existing voice memos?",
+      answer: "Yes. You can import recordings from your device or Files, then tag, sort, and add them to routines just like new recordings."
+    },
+    {
+      question: "How do I prepare for different battle stages?",
+      answer: "Use the Battle Prep tab to create Elim → Quarterfinal → Semifinal → Final rounds, add alternates and notes, and reorder material for the perfect flow."
     }
   ]
 
@@ -828,16 +895,27 @@ function FinalCTA() {
           Ready to <span className="gradient-text">Level Up</span> Your Beatbox?
         </h2>
         <p className="text-xl text-muted-foreground mb-8">
-          Join thousands of beatboxers organizing their creativity
+          Join thousands of beatboxers organizing their creativity with Beatboxx — free on Android and iOS.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <AnimatedButton href="#" size="lg" variant="primary">
+          <AnimatedButton
+            href="https://play.google.com/store/apps/details?id=com.johannes.beatboxx"
+            size="lg"
+            variant="primary"
+            external
+          >
             <Smartphone className="w-5 h-5 shrink-0 align-middle" />
-            Get Beatboxx Free
+            <span className="ml-2">Download for Android</span>
           </AnimatedButton>
-          <AnimatedButton href="https://www.instagram.com/beatboxxapp/" size="lg" variant="ghost" external>
-            <Instagram className="w-5 h-5 shrink-0 align-middle" />
-            Follow Updates
+
+          <AnimatedButton
+            href="https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714"
+            size="lg"
+            variant="secondary"
+            external
+          >
+            <Smartphone className="w-5 h-5 shrink-0 align-middle" />
+            <span className="ml-2">Download for iOS</span>
           </AnimatedButton>
         </div>
       </div>

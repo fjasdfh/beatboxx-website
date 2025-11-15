@@ -8,15 +8,15 @@ import { ChevronLeft, ChevronRight, Sparkles, Sun, Moon } from 'lucide-react'
 const showcaseData = [
   {
     title: "Battle Preparation",
-    description: "Organize your material by battle round - from Elimination to Finals",
+    description: "Organize your material by battle round — from Elim to Finals — with notes, alternates, and backups.",
     screenshots: [
       "/screenshots/battle-prep-light-new.png",
       "/screenshots/battle-prep-dark-new.png"
     ],
     features: [
-      "Stage-by-stage organization",
-      "Quick access to routines",
-      "Add alternates & backups"
+      "Stage-by-stage organization (Elim → Quarters → Semis → Finals)",
+      "Quick access to routines and alternates",
+      "Example flows like: high-impact opener → technical mid → signature drop"
     ],
     hasDarkMode: true
   },

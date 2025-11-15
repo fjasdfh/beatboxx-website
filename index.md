@@ -75,7 +75,7 @@ Terms of Use: /terms
 Support page: https://sites.google.com/view/beatboxx-app/home
 
 ## Supporting the Community
-Beatboxx is free. Optional donations are available — 80% goes directly back to the beatbox community (events, judges, venues).
+Beatboxx is free to download and use on Android and iOS. It’s built with feedback from beatboxers, from beginners to world-stage competitors.
 
 ## Testimonials
 > “I’m way more organized with my stuff now.”
@@ -103,8 +103,8 @@ Use the Battle Prep tab to create Elim → Quarterfinal → Semifinal → Final 
 ### Is everything private and offline?
 Yes. Beatboxx is 100% on-device by default — no cloud, no tracking, no account. You control optional backups to your own iCloud/Google Drive folder.
 
-### Is Beatboxx free? How do donations work?
-Beatboxx is free. Donations are optional, and 80% goes directly back to the beatbox community (events, judges, venues).
+### Is Beatboxx free?
+Yes. Beatboxx is free to download and use on Android and iOS.
 
 ### Will there be iOS/Android parity? What’s on the roadmap?
 Both platforms are supported. We prioritize parity; near-term roadmap includes usability refinements and routine-building improvements. Follow Instagram for updates.
@@ -191,10 +191,10 @@ Support: dev.apollonbeatbox@gmail.com
     },
     {
       "@type": "Question",
-      "name": "Is Beatboxx free? How do donations work?",
+      "name": "Is Beatboxx free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Beatboxx is free. Optional donations are available; 80% supports the beatbox community — events, judges, and venues."
+        "text": "Yes. Beatboxx is free to download and use on Android and iOS."
       }
     },
     {

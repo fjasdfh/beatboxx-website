@@ -72,7 +72,7 @@ export default function TermsPage() {
             </li>
             <li className="flex items-start gap-2">
               <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-              <span>Optional donations support the beatbox community</span>
+              <span>Any in-app payments are processed by Apple or Google; we don&apos;t see your card details</span>
             </li>
           </ul>
         </motion.div>
@@ -141,13 +141,13 @@ export default function TermsPage() {
 
           <Section
             icon={<Heart className="w-6 h-6" />}
-            title="5. Community Support"
+            title="5. Payments and Purchases"
             delay={0.6}
           >
             <p className="text-muted-foreground">
-              Beatboxx offers optional in-app donations. 80% of all donations go directly back to the 
-              beatbox community to support events, judges, and venues. The remaining 20% helps maintain 
-              and improve the app.
+              Beatboxx may offer optional in-app purchases or payments from time to time. These are processed
+              by Apple App Store or Google Play and are subject to their terms and privacy policies. We do not
+              process or store your card details.
             </p>
           </Section>
 

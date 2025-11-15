@@ -31,9 +31,9 @@ These Terms of Use ("Terms") govern your use of the Beatboxx: Recorder & Organiz
 - Beatboxx may allow optional export/import to your own iCloud or Google Drive private folders. Those services are governed by Apple/Google terms and policies.
 - We are not responsible for the availability, security, or retention of data stored in third‑party services.
 
-6) Donations
-- Donations are optional and processed by Apple or Google. Where allowed by platform policy, donations are non‑refundable.
-- We currently direct 80% of donations to support the beatbox community (events, judges, venues). This program may evolve; we plan to communicate updates transparently.
+6) In-app payments
+- Optional in-app payments (if offered) are processed by Apple or Google. Where allowed by platform policy, such payments may be non‑refundable.
+- These payments help support the development and maintenance of Beatboxx. We do not process or store your card details.
 
 7) Acceptable use
 You agree not to:
