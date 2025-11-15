@@ -57,32 +57,29 @@ export default function FloatingCTA() {
             >
               {/* Main floating button */}
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 onClick={() => setIsExpanded(!isExpanded)}
                 className={`
-                  relative overflow-hidden rounded-full shadow-2xl
-                  bg-gradient-to-r from-primary to-accent-vibrant
+                  relative overflow-hidden rounded-full shadow-xl
+                  bg-primary
                   text-white font-medium
                   ${isExpanded ? 'px-6 py-4' : 'w-14 h-14'}
                   flex items-center justify-center gap-2
                   transition-all duration-300
                 `}
               >
-                {/* Animated background effect */}
+                {/* Subtle background pulse */}
                 <motion.div
                   animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.3, 0.1, 0.3],
+                    opacity: [0.2, 0.35, 0.2],
                   }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="absolute inset-0 bg-white rounded-full"
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="absolute inset-0 bg-primary-light/40"
                 />
                 
                 {/* Icon and text */}
                 <motion.div
-                  animate={{ rotate: isExpanded ? 0 : [0, -10, 10, 0] }}
-                  transition={{ duration: 2, repeat: !isExpanded ? Infinity : 0 }}
                   className="relative z-10"
                 >
                   <Download className="w-5 h-5" />
@@ -103,14 +100,14 @@ export default function FloatingCTA() {
                 </AnimatePresence>
               </motion.button>
 
-              {/* Pulsing ring effect */}
+              {/* Soft outer halo */}
               <motion.div
                 animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.5, 0, 0.5],
+                  scale: [1, 1.06, 1],
+                  opacity: [0.4, 0.25, 0.4],
                 }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute inset-0 rounded-full bg-primary-light pointer-events-none"
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute inset-0 rounded-full bg-primary-light/60 pointer-events-none"
               />
 
               {/* Close button when expanded */}
@@ -172,27 +169,7 @@ export default function FloatingCTA() {
         )}
       </AnimatePresence>
 
-      {/* Sparkle decoration */}
-      <AnimatePresence>
-        {isVisible && !isExpanded && (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-            className="fixed bottom-20 right-8 z-30 md:hidden pointer-events-none"
-          >
-            <motion.div
-              animate={{
-                rotate: [0, 360],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              <Sparkles className="w-6 h-6 text-primary-light opacity-60" />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Sparkle decoration removed for a calmer look */}
     </>
   )
 }

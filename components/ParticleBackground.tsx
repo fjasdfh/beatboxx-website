@@ -43,16 +43,16 @@ export default function ParticleBackground() {
     }
     window.addEventListener('mousemove', handleMouseMove)
 
-    // Initialize particles
-    const particleCount = window.innerWidth < 768 ? 30 : 50
+    // Initialize particles (reduced for a calmer, lighter effect)
+    const particleCount = window.innerWidth < 768 ? 18 : 32
     particlesRef.current = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      size: Math.random() * 3 + 1,
-      speedX: (Math.random() - 0.5) * 0.5,
-      speedY: (Math.random() - 0.5) * 0.5,
-      opacity: Math.random() * 0.5 + 0.2,
-      hue: Math.random() * 60 + 80 // Green to yellow range
+      size: Math.random() * 2 + 0.8,
+      speedX: (Math.random() - 0.5) * 0.25,
+      speedY: (Math.random() - 0.5) * 0.25,
+      opacity: Math.random() * 0.3 + 0.15,
+      hue: Math.random() * 40 + 90 // Slightly tighter range in the green family
     }))
 
     // Animation loop
@@ -122,7 +122,7 @@ export default function ParticleBackground() {
     <>
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 pointer-events-none opacity-40"
+        className="absolute inset-0 pointer-events-none opacity-25"
         style={{ mixBlendMode: 'screen' }}
       />
       

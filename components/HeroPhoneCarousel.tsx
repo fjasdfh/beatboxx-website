@@ -3,30 +3,26 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { Sun, Moon, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const phoneScreenshots = [
   {
-    light: '/screenshots/battle-prep-light-new.png',
-    dark: '/screenshots/battle-prep-dark-new.png',
+    image: '/screenshots/battle-prep-light-new.png',
     title: 'Battle Preparation',
     description: 'Organize your sets for GBB'
   },
   {
-    light: '/screenshots/recording-light-new.png',
-    dark: '/screenshots/recording-dark-new.png',
+    image: '/screenshots/recording-light-new.png',
     title: 'Smart Recording',
     description: 'Tag and organize your beats'
   },
   {
-    light: '/screenshots/routine-light-new.png',
-    dark: '/screenshots/routine-dark-new.png',
+    image: '/screenshots/routine-light-new.png',
     title: 'Routine Builder',
     description: 'Perfect your flow'
   },
   {
-    light: '/screenshots/organization-light-new.png',
-    dark: '/screenshots/organization-dark-new.png',
+    image: '/screenshots/organization-light-new.png',
     title: 'Powerful Search',
     description: 'Find beats instantly'
   }
@@ -34,7 +30,6 @@ const phoneScreenshots = [
 
 export default function HeroPhoneCarousel() {
   const [activeIndex, setActiveIndex] = useState(1) // Start with middle phone
-  const [isDarkMode, setIsDarkMode] = useState(false)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
   // Auto-rotate phones
@@ -46,13 +41,7 @@ export default function HeroPhoneCarousel() {
     return () => clearInterval(timer)
   }, [isAutoPlaying])
 
-  // Auto-toggle theme
-  useEffect(() => {
-    const themeTimer = setInterval(() => {
-      setIsDarkMode(prev => !prev)
-    }, 10000)
-    return () => clearInterval(themeTimer)
-  }, [])
+  // Dark mode toggle removed to keep things simple
 
   const handlePrevious = () => {
     setIsAutoPlaying(false)
@@ -66,22 +55,7 @@ export default function HeroPhoneCarousel() {
 
   return (
     <div className="relative min-h-[800px] flex flex-col items-center justify-center overflow-hidden py-8">
-      {/* Theme toggle */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="absolute top-4 right-4 z-30"
-      >
-        <button
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-colors"
-        >
-          <Sun className={`w-4 h-4 transition-all ${!isDarkMode ? 'text-yellow-400 rotate-0' : 'text-gray-400 -rotate-90'}`} />
-          <span className="text-sm font-medium">Theme</span>
-          <Moon className={`w-4 h-4 transition-all ${isDarkMode ? 'text-blue-400 rotate-0' : 'text-gray-400 rotate-90'}`} />
-        </button>
-      </motion.div>
+      {/* Theme toggle removed: carousel now always shows light screenshots */}
 
       {/* Main carousel container */}
       <div className="relative w-full max-w-7xl mx-auto h-[580px] perspective-1000">
@@ -149,9 +123,8 @@ export default function HeroPhoneCarousel() {
                 }}
               >
                 <PhoneFrame3D
-                  screenshot={isDarkMode ? screenshot.dark : screenshot.light}
+                  screenshot={screenshot.image}
                   isActive={isActive}
-                  isDark={isDarkMode}
                   title={screenshot.title}
                 />
               </motion.div>
@@ -207,7 +180,7 @@ export default function HeroPhoneCarousel() {
   )
 }
 
-function PhoneFrame3D({ screenshot, isActive, isDark, title }: { screenshot: string, isActive: boolean, isDark: boolean, title?: string }) {
+function PhoneFrame3D({ screenshot, isActive, title }: { screenshot: string, isActive: boolean, title?: string }) {
   return (
     <motion.div
       whileHover={isActive ? { scale: 1.02 } : {}}

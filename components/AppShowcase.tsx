@@ -3,87 +3,55 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { ChevronLeft, ChevronRight, Sparkles, Sun, Moon } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react'
 
 const showcaseData = [
   {
     title: "Battle Preparation",
     description: "Organize your material by battle round — from Elim to Finals — with notes, alternates, and backups.",
-    screenshots: [
-      "/screenshots/battle-prep-light-new.png",
-      "/screenshots/battle-prep-dark-new.png"
-    ],
+    image: "/screenshots/battle-preparation-light.png",
     features: [
       "Stage-by-stage organization (Elim → Quarters → Semis → Finals)",
       "Quick access to routines and alternates",
       "Example flows like: high-impact opener → technical mid → signature drop"
     ],
-    hasDarkMode: true
   },
   {
     title: "Smart Recording & Tagging",
     description: "Tag your beats with techniques, tempo, energy, and mood",
-    screenshots: [
-      "/screenshots/recording-light-new.png",
-      "/screenshots/recording-dark-new.png"
-    ],
+    image: "/screenshots/smart-recording-light.png",
     features: [
       "One-tap recording",
       "Custom tags & categories", 
       "Quick search & filter"
     ],
-    hasDarkMode: true
   },
   {
     title: "Routine Builder",
     description: "Build perfect routines with drag-and-drop ordering",
-    screenshots: [
-      "/screenshots/routine-light-new.png",
-      "/screenshots/routine-dark-new.png"
-    ],
+    image: "/screenshots/routine-builder-light.png",
     features: [
       "Genre-based folders",
       "Pin your best takes",
       "Reorder for perfect flow"
     ],
-    hasDarkMode: true
   },
   {
     title: "Powerful Organization",
     description: "Find any beat instantly with smart search and filters",
-    screenshots: [
-      "/screenshots/organization-light-new.png",
-      "/screenshots/organization-dark-new.png"
-    ],
+    image: "/screenshots/powerful-organization-light.png",
     features: [
       "Search combinations",
       "Filter by tags",
       "Quick preview"
     ],
-    hasDarkMode: true
   }
 ]
 
 export default function AppShowcase() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [imageIndex, setImageIndex] = useState(0)
   
   const currentShowcase = showcaseData[activeIndex]
-
-  // Auto-rotate through images for current showcase
-  useEffect(() => {
-    if (currentShowcase.screenshots.length > 1) {
-      const timer = setInterval(() => {
-        setImageIndex((prev) => (prev + 1) % currentShowcase.screenshots.length)
-      }, 3000)
-      return () => clearInterval(timer)
-    }
-  }, [activeIndex, currentShowcase.screenshots.length])
-
-  // Reset image index when showcase changes
-  useEffect(() => {
-    setImageIndex(0)
-  }, [activeIndex])
 
   const nextShowcase = () => {
     setActiveIndex((prev) => (prev + 1) % showcaseData.length)
@@ -133,7 +101,7 @@ export default function AppShowcase() {
                 <PhoneFrame>
                   <AnimatePresence mode="wait">
                     <motion.div
-                      key={`${activeIndex}-${imageIndex}`}
+                      key={activeIndex}
                       initial={{ opacity: 0, scale: 1.05 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
@@ -141,7 +109,7 @@ export default function AppShowcase() {
                       className="aspect-[9/19.5] relative"
                     >
                       <Image
-                        src={currentShowcase.screenshots[imageIndex]}
+                        src={currentShowcase.image}
                         alt={currentShowcase.title}
                         fill
                         className="object-cover object-top rounded-[2.2rem]"
@@ -181,34 +149,7 @@ export default function AppShowcase() {
                 </PhoneFrame>
               </motion.div>
 
-              {/* Light/Dark Mode toggle - Prominent */}
-              {currentShowcase.screenshots.length > 1 && (
-                <div className="flex justify-center mt-6 sm:mt-8">
-                  <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-md border border-white/20 shadow-lg">
-                    <Sun className={`w-5 h-5 transition-colors ${
-                      imageIndex === 0 ? 'text-yellow-400' : 'text-gray-500'
-                    }`} />
-                    <div className="text-xs font-medium text-gray-300">LIGHT</div>
-                    <button
-                      onClick={() => setImageIndex(imageIndex === 0 ? 1 : 0)}
-                      className="relative w-12 h-6 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors shadow-inner"
-                      aria-label="Toggle light/dark mode"
-                    >
-                      <motion.div
-                        animate={{
-                          x: imageIndex === 0 ? 2 : 26
-                        }}
-                        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                        className="absolute top-1 w-4 h-4 rounded-full bg-white shadow-md"
-                      />
-                    </button>
-                    <div className="text-xs font-medium text-gray-300">DARK</div>
-                    <Moon className={`w-5 h-5 transition-colors ${
-                      imageIndex === 1 ? 'text-blue-400' : 'text-gray-500'
-                    }`} />
-                  </div>
-                </div>
-              )}
+              {/* Removed light/dark screenshot toggle for a simpler experience */}
             </div>
           </motion.div>
 
