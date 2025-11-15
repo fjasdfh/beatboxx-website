@@ -144,7 +144,9 @@ export default function FloatingCTA() {
                   className="absolute bottom-full mb-2 right-0 flex flex-col gap-2"
                 >
                   <motion.a
-                    href="#"
+                    href="https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-4 py-2 rounded-full bg-black text-white text-sm font-medium shadow-lg flex items-center gap-2 whitespace-nowrap"
@@ -153,7 +155,9 @@ export default function FloatingCTA() {
                     iOS
                   </motion.a>
                   <motion.a
-                    href="#"
+                    href="https://play.google.com/store/apps/details?id=com.johannes.beatboxx"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium shadow-lg flex items-center gap-2 whitespace-nowrap"

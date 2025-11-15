@@ -188,11 +188,11 @@ export default function HomePage() {
               variants={fadeInUp}
               className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-6 px-4"
             >
-              <AnimatedButton href="#" size="lg" variant="primary" className="w-full sm:w-auto">
+              <AnimatedButton href="https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714" size="lg" variant="primary" className="w-full sm:w-auto" external>
                 <Download className="w-5 h-5 shrink-0" />
                 <span className="ml-2">Download for iOS</span>
               </AnimatedButton>
-              <AnimatedButton href="#" size="lg" variant="secondary" className="w-full sm:w-auto">
+              <AnimatedButton href="https://play.google.com/store/apps/details?id=com.johannes.beatboxx" size="lg" variant="secondary" className="w-full sm:w-auto" external>
                 <Download className="w-5 h-5 shrink-0" />
                 <span className="ml-2">Download for Android</span>
               </AnimatedButton>
