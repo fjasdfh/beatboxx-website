@@ -95,9 +95,33 @@ export default function AppShowcase() {
             className="relative order-1 lg:order-1"
           >
             <div className="relative mx-auto max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] w-full">
-              {/* Big, bold phone mockup */}
-              {/* Main Phone */}
-              <div className="relative z-10">
+              {/* Mobile: simple screenshot card without full device frame */}
+              <div className="block lg:hidden rounded-[2rem] overflow-hidden shadow-xl bg-black/90">
+                <div className="aspect-[9/19.5] relative">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeIndex}
+                      initial={{ opacity: 0, scale: 1.02 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.98 }}
+                      transition={{ duration: 0.4 }}
+                      className="relative w-full h-full"
+                    >
+                      <Image
+                        src={currentShowcase.image}
+                        alt={currentShowcase.title}
+                        fill
+                        className="object-cover object-top"
+                        sizes="(max-width: 640px) 320px, 420px"
+                        priority
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Desktop: keep premium 3D phone frame */}
+              <div className="hidden lg:block relative z-10">
                 <PhoneFrame>
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -119,6 +143,40 @@ export default function AppShowcase() {
                     </motion.div>
                   </AnimatePresence>
                 </PhoneFrame>
+              </div>
+
+              {/* Mobile navigation placed directly under phone to connect controls and screenshots */}
+              <div className="mt-4 flex items-center justify-center gap-4 lg:hidden">
+                <button
+                  onClick={prevShowcase}
+                  className="p-2 rounded-full bg-primary-light/10 hover:bg-primary-light/20 transition-colors"
+                  aria-label="Previous showcase"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+
+                <div className="flex gap-2">
+                  {showcaseData.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setActiveIndex(index)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        index === activeIndex
+                          ? 'w-6 bg-primary'
+                          : 'w-2 bg-gray-400 hover:bg-gray-600'
+                      }`}
+                      aria-label={`Go to showcase ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  onClick={nextShowcase}
+                  className="p-2 rounded-full bg-primary-light/10 hover:bg-primary-light/20 transition-colors"
+                  aria-label="Next showcase"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
 
               {/* Background Phone (decorative) */}
@@ -196,8 +254,8 @@ export default function AppShowcase() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Navigation - Mobile centered */}
-            <div className="flex items-center justify-center lg:justify-start gap-4 pt-6 sm:pt-8">
+            {/* Navigation - Shown next to text on larger screens */}
+            <div className="hidden lg:flex items-center justify-start gap-4 pt-6 sm:pt-8">
               <button
                 onClick={prevShowcase}
                 className="p-2 sm:p-3 rounded-full bg-primary-light/10 hover:bg-primary-light/20 transition-colors"
