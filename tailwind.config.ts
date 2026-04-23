@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import typography from '@tailwindcss/typography'
 
 const config: Config = {
   darkMode: 'class',
@@ -6,6 +7,7 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './content/**/*.{md,mdx}',
   ],
   theme: {
     screens: {
@@ -166,8 +168,57 @@ const config: Config = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'gradient-shine': 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.7) 50%, transparent 60%)',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': '#373A2C',
+            '--tw-prose-headings': '#2A3513',
+            '--tw-prose-lead': '#373A2C',
+            '--tw-prose-links': '#526526',
+            '--tw-prose-bold': '#2A3513',
+            '--tw-prose-counters': '#737373',
+            '--tw-prose-bullets': '#AEB29E',
+            '--tw-prose-hr': '#E5E7EB',
+            '--tw-prose-quotes': '#373A2C',
+            '--tw-prose-quote-borders': '#D4EC9D',
+            '--tw-prose-captions': '#737373',
+            '--tw-prose-code': '#2A3513',
+            '--tw-prose-pre-code': '#F5F3E6',
+            '--tw-prose-pre-bg': '#2A3513',
+            '--tw-prose-th-borders': '#E5E7EB',
+            '--tw-prose-td-borders': '#E5E7EB',
+            h1: { fontFamily: 'Space Grotesk, system-ui, sans-serif', fontWeight: '700' },
+            h2: { fontFamily: 'Space Grotesk, system-ui, sans-serif', fontWeight: '700' },
+            h3: { fontFamily: 'Space Grotesk, system-ui, sans-serif', fontWeight: '600' },
+            h4: { fontFamily: 'Space Grotesk, system-ui, sans-serif', fontWeight: '600' },
+            a: {
+              fontWeight: '500',
+              textDecoration: 'underline',
+              textDecorationColor: '#8FD14F',
+              textUnderlineOffset: '3px',
+              transition: 'color 0.15s ease',
+              '&:hover': { color: '#8FD14F' },
+            },
+            'code::before': { content: '""' },
+            'code::after': { content: '""' },
+            code: {
+              backgroundColor: '#D4EC9D33',
+              padding: '0.15rem 0.35rem',
+              borderRadius: '0.3rem',
+              fontWeight: '500',
+            },
+            blockquote: {
+              fontStyle: 'normal',
+              borderLeftWidth: '3px',
+              paddingLeft: '1.25rem',
+            },
+            'blockquote p:first-of-type::before': { content: '""' },
+            'blockquote p:last-of-type::after': { content: '""' },
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [typography],
 }
 export default config

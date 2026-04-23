@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Download, Instagram, ChevronRight, Music, Home, Info, Shield, Mail } from 'lucide-react'
+import { Menu, X, Download, Instagram, ChevronRight, Music, Home, Info, Shield, Mail, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 
 export default function MobileNav() {
@@ -50,7 +50,8 @@ export default function MobileNav() {
 
   const menuItems = [
     { icon: Home, label: 'Home', href: '/' },
-    { icon: Info, label: 'Features', href: '#features' },
+    { icon: Info, label: 'Features', href: '/#features' },
+    { icon: BookOpen, label: 'Blog', href: '/blog' },
     { icon: Shield, label: 'Privacy', href: '/privacy' },
     { icon: Mail, label: 'Contact', href: 'mailto:dev.apollonbeatbox@gmail.com' }
   ]
