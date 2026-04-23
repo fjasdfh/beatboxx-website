@@ -103,45 +103,45 @@ export const viewport: Viewport = {
   ],
 }
 
-const organizationLd = {
+const siteGraphLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  '@id': `${SITE_URL}#organization`,
-  name: 'Beatboxx',
-  url: SITE_URL,
-  logo: `${SITE_URL}/icon.png`,
-  sameAs: ['https://www.instagram.com/beatboxxapp/'],
-}
-
-const websiteLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  '@id': `${SITE_URL}#website`,
-  url: SITE_URL,
-  name: 'Beatboxx',
-  description: SITE_DESCRIPTION,
-  publisher: { '@id': `${SITE_URL}#organization` },
-  inLanguage: 'en-US',
-}
-
-const mobileAppLd = {
-  '@context': 'https://schema.org',
-  '@type': 'MobileApplication',
-  '@id': `${SITE_URL}#app`,
-  name: 'Beatboxx — Beatbox Recorder & Organizer',
-  description: SITE_DESCRIPTION,
-  operatingSystem: 'iOS, Android',
-  applicationCategory: 'MusicApplication',
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-  },
-  downloadUrl: [
-    'https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714',
-    'https://play.google.com/store/apps/details?id=com.johannes.beatboxx',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}#organization`,
+      name: 'Beatboxx',
+      url: SITE_URL,
+      logo: `${SITE_URL}/icon.png`,
+      sameAs: ['https://www.instagram.com/beatboxxapp/'],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}#website`,
+      url: SITE_URL,
+      name: 'Beatboxx',
+      description: SITE_DESCRIPTION,
+      publisher: { '@id': `${SITE_URL}#organization` },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'MobileApplication',
+      '@id': `${SITE_URL}#app`,
+      name: 'Beatboxx — Beatbox Recorder & Organizer',
+      description: SITE_DESCRIPTION,
+      operatingSystem: 'iOS, Android',
+      applicationCategory: 'MusicApplication',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+      downloadUrl: [
+        'https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714',
+        'https://play.google.com/store/apps/details?id=com.johannes.beatboxx',
+      ],
+      publisher: { '@id': `${SITE_URL}#organization` },
+    },
   ],
-  publisher: { '@id': `${SITE_URL}#organization` },
 }
 
 export default function RootLayout({
@@ -155,7 +155,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([organizationLd, websiteLd, mobileAppLd]),
+            __html: JSON.stringify(siteGraphLd),
           }}
         />
         <div className="relative">{children}</div>
