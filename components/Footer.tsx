@@ -39,7 +39,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-border-light text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Beatboxx. Built with ❤️ for the beatbox community.</p>
+          <p>© {new Date().getFullYear()} Beatboxx. Built by a beatboxer for the beatbox community.</p>
         </div>
       </div>
     </footer>

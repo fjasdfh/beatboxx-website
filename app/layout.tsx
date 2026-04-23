@@ -14,13 +14,13 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://beatboxx.app'),
-  title: 'Beatboxx — Recorder & Organizer for Beatboxers',
-  description: 'Organize beatbox ideas, tag techniques, build routines, and prep battle rounds. 100% on-device, privacy-first. iOS & Android.',
-  keywords: ['beatbox', 'beatboxing', 'music', 'recording', 'organizer', 'battle', 'routine', 'iOS', 'Android'],
+  title: 'Beatboxx — Built by a beatboxer. Record, tag, battle.',
+  description: 'Record ideas, build routines, prep for battles. BPM auto-detect, metronome, waveform scrubbing, smart tagging. 100% on-device. Free on iOS and Android.',
+  keywords: ['beatbox', 'beatboxing', 'music', 'recording', 'organizer', 'battle', 'routine', 'iOS', 'Android', 'metronome', 'BPM detection', 'waveform', 'tap tempo', 'battle prep', 'routine builder', 'on-device', 'offline'],
   authors: [{ name: 'Beatboxx Team' }],
   openGraph: {
-    title: 'Beatboxx — Recorder & Organizer for Beatboxers',
-    description: 'Organize beatbox ideas, tag techniques, build routines, and prep battle rounds. 100% on-device, privacy-first.',
+    title: 'Beatboxx — Built by a beatboxer. Record, tag, battle.',
+    description: 'Record ideas, build routines, prep for battles. BPM auto-detect, metronome, waveform scrubbing, smart tagging. 100% on-device.',
     url: 'https://beatboxx.app',
     siteName: 'Beatboxx',
     images: [
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Beatboxx — Recorder & Organizer for Beatboxers',
-    description: 'Organize beatbox ideas, tag techniques, build routines, and prep battle rounds.',
+    title: 'Beatboxx — Built by a beatboxer. Record, tag, battle.',
+    description: 'Record ideas, build routines, prep for battles. BPM auto-detect, metronome, smart tagging. 100% on-device.',
     images: ['/og.png'],
   },
   robots: {
