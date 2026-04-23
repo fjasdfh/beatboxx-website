@@ -6,18 +6,21 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { Calendar, User, ArrowLeft, Download } from 'lucide-react'
 
 import {
+  absoluteUrl,
   getAllSlugs,
   getPostBySlug,
   postUrl,
   formatPublishedDate,
-  SITE_URL,
 } from '@/lib/blog'
-import { mdxComponents } from '@/lib/mdx-components'
 import { schemaForPost } from '@/lib/listicle-schema'
+import AnimatedButton from '@/components/AnimatedButton'
 import UpdatedBadge from '@/components/blog/UpdatedBadge'
 import AppList from '@/components/blog/AppList'
 import FAQ from '@/components/blog/FAQ'
 import CompareTable from '@/components/blog/CompareTable'
+import Callout from '@/components/blog/Callout'
+
+const mdxComponents = { Callout }
 
 interface PageProps {
   params: { slug: string }
@@ -32,7 +35,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
   if (!post) return {}
 
   const url = postUrl(post)
-  const image = post.coverImage.startsWith('http') ? post.coverImage : `${SITE_URL}${post.coverImage}`
+  const image = absoluteUrl(post.coverImage)
 
   return {
     title: `${post.title} — Beatboxx Blog`,
@@ -66,6 +69,7 @@ export default function PostPage({ params }: PageProps) {
   if (!post) notFound()
 
   const schema = schemaForPost(post)
+  const isListicle = post.type === 'listicle'
 
   return (
     <article className="pt-20 md:pt-12 pb-24">
@@ -88,7 +92,7 @@ export default function PostPage({ params }: PageProps) {
             <span className="text-[11px] font-semibold uppercase tracking-wider text-primary bg-primary-light/30 px-2.5 py-1 rounded-full">
               {post.category}
             </span>
-            {post.type === 'listicle' && <UpdatedBadge post={post} />}
+            {isListicle && <UpdatedBadge post={post} />}
             {post.draft && (
               <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-700 bg-amber-100 px-2.5 py-1 rounded-full">
                 Draft
@@ -129,22 +133,23 @@ export default function PostPage({ params }: PageProps) {
           <MDXRemote source={post.content} components={mdxComponents} />
         </div>
 
-        {post.type === 'listicle' && post.appList && <AppList items={post.appList} />}
-        {post.type === 'listicle' && post.compare && <CompareTable data={post.compare} />}
-        {post.type === 'listicle' && post.faq && <FAQ items={post.faq} />}
+        {isListicle && (
+          <>
+            {post.appList && <AppList items={post.appList} />}
+            {post.compare && <CompareTable data={post.compare} />}
+            {post.faq && <FAQ items={post.faq} />}
+          </>
+        )}
 
-        <aside className="mt-16 rounded-2xl border border-primary-light/60 bg-primary-light/20 p-6 md:p-8 text-center">
+        <aside className="mt-16 rounded-2xl border border-primary-light/60 bg-primary-light/20 p-8 md:p-10 text-center">
           <h2 className="font-display font-bold text-2xl text-foreground">Record your own beats.</h2>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-2 mb-6 text-muted-foreground">
             Beatboxx is a privacy-first recorder and organizer for beatboxers. 100% on-device, free to start.
           </p>
-          <Link
-            href="/#download"
-            className="mt-5 inline-flex items-center gap-2 bg-primary text-background font-medium px-5 py-3 rounded-full hover:bg-primary-dark transition-colors"
-          >
+          <AnimatedButton href="/#download" variant="primary" size="md">
             <Download className="w-4 h-4" />
             Get Beatboxx
-          </Link>
+          </AnimatedButton>
         </aside>
       </div>
     </article>

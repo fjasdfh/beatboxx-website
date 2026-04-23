@@ -2,17 +2,11 @@
 
 import Link from 'next/link'
 import { Music, Download } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import AnimatedButton from '@/components/AnimatedButton'
+import { useScrolled } from '@/hooks/useScrolled'
 
 export default function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const scrolled = useScrolled(12)
 
   return (
     <header
@@ -33,13 +27,10 @@ export default function SiteHeader() {
           <Link href="/blog" className="text-foreground hover:text-primary transition-colors">
             Blog
           </Link>
-          <Link
-            href="/#download"
-            className="inline-flex items-center gap-2 bg-primary text-background px-4 py-2 rounded-full hover:bg-primary-dark transition-colors"
-          >
+          <AnimatedButton href="/#download" variant="primary" size="sm">
             <Download className="w-4 h-4" />
             Get the app
-          </Link>
+          </AnimatedButton>
         </nav>
       </div>
     </header>

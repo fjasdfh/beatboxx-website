@@ -89,12 +89,20 @@ function parsePost(filePath: string): Post {
       throw new Error(`Blog post "${filename}" is missing required frontmatter field: ${field}`)
     }
   }
+  if (!Array.isArray(data.tags)) {
+    throw new Error(`Blog post "${filename}" frontmatter field "tags" must be an array`)
+  }
 
   const type: PostType = data.type === 'listicle' ? 'listicle' : 'article'
   const slug: string = data.slug || filename.replace(/\.mdx?$/, '')
 
   if (type === 'listicle' && !Array.isArray(data.appList)) {
     throw new Error(`Listicle post "${filename}" requires an "appList" array in frontmatter`)
+  }
+  if (data.compare !== undefined) {
+    if (!data.compare.columns || !Array.isArray(data.compare.columns) || !Array.isArray(data.compare.rows)) {
+      throw new Error(`Blog post "${filename}" has malformed "compare" — expected { columns: [], rows: [] }`)
+    }
   }
 
   const stats = readingTime(content)
@@ -110,16 +118,13 @@ function parsePost(filePath: string): Post {
     coverImage: String(data.coverImage),
     coverImageAlt: String(data.coverImageAlt),
     category: String(data.category),
-    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+    tags: data.tags.map(String),
     draft: Boolean(data.draft),
     content,
     readingTime: stats.text,
     appList: Array.isArray(data.appList) ? (data.appList as AppListItem[]) : undefined,
     faq: Array.isArray(data.faq) ? (data.faq as FaqItem[]) : undefined,
-    compare:
-      data.compare && Array.isArray(data.compare.columns) && Array.isArray(data.compare.rows)
-        ? (data.compare as CompareData)
-        : undefined,
+    compare: data.compare as CompareData | undefined,
   }
 }
 
@@ -129,28 +134,44 @@ function toIsoDate(input: unknown, filename: string, field: string): string {
   throw new Error(`Blog post "${filename}" has invalid ${field}: expected YYYY-MM-DD, got ${String(input)}`)
 }
 
-let cachedPosts: Post[] | null = null
+interface PostCache {
+  all: Post[]
+  published: Post[]
+  bySlug: Map<string, Post>
+}
 
-function readAllPosts(): Post[] {
-  if (cachedPosts) return cachedPosts
-  if (!fs.existsSync(CONTENT_DIR)) {
-    cachedPosts = []
-    return cachedPosts
+let cache: PostCache | null = null
+
+function readAllPosts(): PostCache {
+  if (cache) return cache
+  let files: string[]
+  try {
+    files = fs.readdirSync(CONTENT_DIR).filter((f) => /\.mdx?$/.test(f))
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+      cache = { all: [], published: [], bySlug: new Map() }
+      return cache
+    }
+    throw err
   }
-  const files = fs.readdirSync(CONTENT_DIR).filter((f) => /\.mdx?$/.test(f))
-  cachedPosts = files
+  const all = files
     .map((f) => parsePost(path.join(CONTENT_DIR, f)))
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-  return cachedPosts
+  cache = {
+    all,
+    published: all.filter((p) => !p.draft),
+    bySlug: new Map(all.map((p) => [p.slug, p])),
+  }
+  return cache
 }
 
 export function getAllPosts(includeDrafts = process.env.NODE_ENV !== 'production'): Post[] {
-  const posts = readAllPosts()
-  return includeDrafts ? posts : posts.filter((p) => !p.draft)
+  const c = readAllPosts()
+  return includeDrafts ? c.all : c.published
 }
 
 export function getPostBySlug(slug: string): Post | undefined {
-  return readAllPosts().find((p) => p.slug === slug)
+  return readAllPosts().bySlug.get(slug)
 }
 
 export function getAllSlugs(): string[] {
@@ -159,6 +180,11 @@ export function getAllSlugs(): string[] {
 
 export function postUrl(post: Post): string {
   return `${SITE_URL}${BLOG_BASE_PATH}/${post.slug}`
+}
+
+export function absoluteUrl(pathOrUrl: string): string {
+  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl
+  return `${SITE_URL}${pathOrUrl.startsWith('/') ? '' : '/'}${pathOrUrl}`
 }
 
 export function formatPublishedDate(iso: string): string {

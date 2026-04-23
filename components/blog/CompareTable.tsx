@@ -28,7 +28,7 @@ export default function CompareTable({ data }: { data: CompareData }) {
         </thead>
         <tbody>
           {data.rows.map((row, i) => (
-            <tr key={i} className={i % 2 === 0 ? 'bg-background/30' : ''}>
+            <tr key={row.label} className={i % 2 === 0 ? 'bg-background/30' : ''}>
               <td className="px-4 py-3 font-medium text-foreground">{row.label}</td>
               {data.columns.map((col) => (
                 <td key={col.key} className="px-4 py-3 text-center text-foreground">

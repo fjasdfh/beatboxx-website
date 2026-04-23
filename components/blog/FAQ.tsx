@@ -14,7 +14,7 @@ export default function FAQ({ items, heading = 'Frequently asked questions' }: {
       <Accordion.Root type="multiple" className="space-y-2">
         {items.map((qa, i) => (
           <Accordion.Item
-            key={i}
+            key={qa.question}
             value={`faq-${i}`}
             className="rounded-xl border border-border-light bg-background/60 overflow-hidden"
           >

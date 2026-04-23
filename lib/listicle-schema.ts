@@ -1,9 +1,4 @@
-import { postUrl, SITE_URL, type Post } from './blog'
-
-function absoluteUrl(pathOrUrl: string): string {
-  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl
-  return `${SITE_URL}${pathOrUrl.startsWith('/') ? '' : '/'}${pathOrUrl}`
-}
+import { absoluteUrl, postUrl, SITE_URL, type Post } from './blog'
 
 function blogPostingNode(post: Post) {
   return {

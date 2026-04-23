@@ -4,13 +4,13 @@ import type { AppListItem } from '@/lib/blog'
 import Disclosure from './Disclosure'
 
 function Rating({ value }: { value: number }) {
-  const full = Math.round(value * 2) / 2
+  const filled = Math.round(value)
   return (
     <div className="flex items-center gap-1" aria-label={`${value} out of 5`}>
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
-          className={`w-4 h-4 ${i < full ? 'text-accent-vibrant fill-accent-vibrant' : 'text-muted'}`}
+          className={`w-4 h-4 ${i < filled ? 'text-accent-vibrant fill-accent-vibrant' : 'text-muted-foreground/40'}`}
           aria-hidden
         />
       ))}

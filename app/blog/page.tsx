@@ -37,9 +37,9 @@ export default function BlogIndexPage() {
           <p className="text-muted-foreground">No posts yet — check back soon.</p>
         ) : (
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0">
-            {posts.map((post) => (
+            {posts.map((post, i) => (
               <li key={post.slug}>
-                <PostCard post={post} />
+                <PostCard post={post} priority={i === 0} />
               </li>
             ))}
           </ul>

@@ -4,18 +4,11 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Download, Instagram, ChevronRight, Music, Home, Info, Shield, Mail, BookOpen } from 'lucide-react'
 import Link from 'next/link'
+import { useScrolled } from '@/hooks/useScrolled'
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const scrolled = useScrolled(20)
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -213,7 +206,7 @@ export default function MobileNav() {
 
               {/* Footer */}
               <div className="p-6 text-center text-sm text-muted-foreground">
-                <p>© 2024 Beatboxx</p>
+                <p>© {new Date().getFullYear()} Beatboxx</p>
                 <p className="mt-2">Built with ❤️ for beatboxers</p>
               </div>
             </motion.div>
