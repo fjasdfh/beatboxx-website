@@ -172,7 +172,8 @@ export default function MobileNav() {
               <div className="p-6 space-y-4 border-t border-border-light">
                 <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Download App</h3>
                 <motion.a
-                  href="#"
+                  href="/#download"
+                  onClick={() => setIsOpen(false)}
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 0.3 }}

@@ -51,11 +51,14 @@ function itemListNode(post: Post) {
           : {}),
         ...(typeof item.rating === 'number'
           ? {
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue: item.rating,
-                bestRating: 5,
-                ratingCount: 1,
+              review: {
+                '@type': 'Review',
+                reviewRating: {
+                  '@type': 'Rating',
+                  ratingValue: item.rating,
+                  bestRating: 5,
+                },
+                author: { '@type': 'Organization', name: post.author },
               },
             }
           : {}),
