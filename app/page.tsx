@@ -1,6 +1,12 @@
 'use client'
 
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+  useReducedMotion,
+} from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
 import { useInView } from 'react-intersection-observer'
 import AnimatedButton from '@/components/AnimatedButton'
@@ -20,33 +26,87 @@ import {
   Instagram,
 } from 'lucide-react'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: 'easeOut' },
+  },
+}
+
+const stagger = {
+  visible: {
+    transition: { staggerChildren: 0.1 },
+  },
+}
+
+const ANDROID_URL =
+  'https://play.google.com/store/apps/details?id=com.johannes.beatboxx'
+const IOS_URL =
+  'https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714'
+
+const testimonials = [
+  {
+    quote: "I'm way more organized with my stuff now.",
+    author: 'Beatboxer',
+  },
+  {
+    quote:
+      'Mate you have no idea how much it will change me and mostly my beginner beatbox friends who also want to beatbox in the high levels.',
+    author: 'Community Member',
+  },
+  {
+    quote:
+      'If you are a Beatboxer who wants to progress and prepare for battle, show etc. this is the perfect app. A must for every Beatboxer.',
+    author: 'Beatboxer',
+  },
+]
+
+const faqs = [
+  {
+    question: 'How is Beatboxx different from Voice Memos?',
+    answer:
+      "Built for how beatboxers actually work. Auto-detect BPM, tag by technique, search combinations like 'technical + trap,' build routines, prep battle rounds.",
+  },
+  {
+    question: 'Does it detect BPM automatically?',
+    answer:
+      'Yes. 70–200 BPM with harmonic matching. Re-detects after you trim. Tap-tempo if you want to set it yourself.',
+  },
+  {
+    question: 'Is there a built-in metronome?',
+    answer:
+      'Yes. 40–240 BPM, time signatures from 2/4 to 20/4, tap-tempo, visual and audible beat.',
+  },
+  {
+    question: 'Is Beatboxx free?',
+    answer: 'Yes. No ads, no premium tier. Free on iOS and Android.',
+  },
+  {
+    question: 'Is my stuff private?',
+    answer:
+      'Everything stays on your device. No cloud uploads, no accounts, no data collection. Full library export and restore via ZIP packages — nothing ever touches our servers.',
+  },
+  {
+    question: 'Can I import existing voice memos?',
+    answer:
+      'Yes. Import from Voice Memos or Files — M4A, MP3, AAC, WAV, FLAC, and more. Tag, search, and drop them into routines.',
+  },
+  {
+    question: 'How do I prep for different battle stages?',
+    answer:
+      'Battle Prep Mode has a dedicated workspace. Organize material by round (Elim → Quarter → Semi → Final), add alternates, quick-listen to any section, walk on stage knowing your set cold.',
+  },
+]
 
 export default function HomePage() {
-  const [mounted, setMounted] = useState(false)
   const { scrollY } = useScroll()
   const y1 = useTransform(scrollY, [0, 300], [0, 50])
   const y2 = useTransform(scrollY, [0, 300], [0, -50])
   const opacity = useTransform(scrollY, [0, 300], [1, 0.5])
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  }
-
-  const stagger = {
-    visible: {
-      transition: { staggerChildren: 0.1 },
-    },
-  }
 
   return (
     <main className="overflow-hidden">
@@ -148,26 +208,7 @@ export default function HomePage() {
               variants={fadeInUp}
               className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-6 px-4"
             >
-              <AnimatedButton
-                href="https://play.google.com/store/apps/details?id=com.johannes.beatboxx"
-                size="lg"
-                variant="primary"
-                className="w-full sm:w-auto"
-                external
-              >
-                <Download className="w-5 h-5 shrink-0" />
-                <span className="ml-2">Download for Android</span>
-              </AnimatedButton>
-              <AnimatedButton
-                href="https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714"
-                size="lg"
-                variant="secondary"
-                className="w-full sm:w-auto"
-                external
-              >
-                <Download className="w-5 h-5 shrink-0" />
-                <span className="ml-2">Download for iOS</span>
-              </AnimatedButton>
+              <DownloadButtons icon={Download} fullWidthOnMobile />
             </motion.div>
 
             <motion.p
@@ -191,7 +232,6 @@ export default function HomePage() {
               </motion.a>
             </motion.div>
 
-            {/* Mobile phone preview */}
             <motion.div
               variants={fadeInUp}
               className="md:hidden mt-8 relative mx-auto max-w-[260px] sm:max-w-[280px]"
@@ -215,7 +255,6 @@ export default function HomePage() {
                       fill
                       className="object-cover object-top"
                       sizes="(max-width: 640px) 260px, 280px"
-                      priority
                     />
                   </div>
                   <div className="absolute right-[-4px] top-24 w-[3px] h-8 rounded-r-lg bg-gray-700" />
@@ -277,7 +316,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CAPTURE IDEAS INSTANTLY */}
       <FeatureSection
         id="capture"
         label="Capture ideas instantly"
@@ -294,7 +332,6 @@ export default function HomePage() {
         accent="from-red-500/20 to-orange-500/20"
       />
 
-      {/* KNOW YOUR SOUND */}
       <FeatureSection
         id="know"
         label="Know your sound"
@@ -313,7 +350,6 @@ export default function HomePage() {
         accent="from-purple-500/20 to-pink-500/20"
       />
 
-      {/* BUILD KILLER ROUTINES */}
       <FeatureSection
         id="build"
         label="Build killer routines"
@@ -330,7 +366,6 @@ export default function HomePage() {
         accent="from-green-500/20 to-emerald-500/20"
       />
 
-      {/* BATTLE PREP MODE */}
       <FeatureSection
         id="battle"
         label="Battle prep mode"
@@ -348,17 +383,28 @@ export default function HomePage() {
         accent="from-blue-500/20 to-purple-500/20"
       />
 
-      {/* STAY ON BEAT */}
-      <StayOnBeatSection />
+      <FeatureSection
+        id="metronome"
+        label="Stay on beat"
+        headline="A metronome that moves with you."
+        body="Practice with a click, record over it, tighten your timing. Adjust BPM and time signatures to whatever the piece asks for."
+        bullets={[
+          '40–240 BPM',
+          'Time signatures from 2/4 to 20/4',
+          'Tap-tempo when you know the feel',
+          'Visual and audible beat',
+        ]}
+        accent="from-primary-light/30 to-accent-vibrant/30"
+      >
+        <MetronomeMock />
+      </FeatureSection>
 
-      {/* YOUR BEATS STAY YOURS */}
       <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-foreground text-background">
         <div className="max-w-4xl mx-auto text-center">
           <PrivacySection />
         </div>
       </section>
 
-      {/* Testimonials */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary-light/10 via-transparent to-accent-vibrant/10 rounded-full blur-3xl" />
@@ -368,14 +414,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-primary-light/5">
         <div className="max-w-4xl mx-auto">
           <FAQSection />
         </div>
       </section>
 
-      {/* Final CTA */}
       <section className="py-24 px-4 sm:px-6 lg:px-8">
         <FinalCTA />
       </section>
@@ -385,78 +429,40 @@ export default function HomePage() {
   )
 }
 
-// STAY ON BEAT — metronome inline demo
-function StayOnBeatSection() {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 })
-
+function DownloadButtons({
+  icon: Icon,
+  fullWidthOnMobile,
+}: {
+  icon: typeof Download
+  fullWidthOnMobile?: boolean
+}) {
+  const widthClass = fullWidthOnMobile ? 'w-full sm:w-auto' : ''
   return (
-    <section
-      id="metronome"
-      ref={ref}
-      className="py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background via-primary-light/5 to-background"
-    >
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="space-y-5 text-center lg:text-left"
-          >
-            <span className="inline-block text-xs sm:text-sm font-mono tracking-[0.2em] text-primary uppercase">
-              Stay on beat
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold leading-tight">
-              A metronome that moves with you.
-            </h2>
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Practice with a click, record over it, tighten your timing. Adjust BPM and time signatures to whatever the piece asks for.
-            </p>
-            <ul className="space-y-3 pt-2">
-              {[
-                '40–240 BPM',
-                'Time signatures from 2/4 to 20/4',
-                'Tap-tempo when you know the feel',
-                'Visual and audible beat',
-              ].map((bullet, i) => (
-                <motion.li
-                  key={bullet}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
-                  className="flex items-start gap-3 justify-center lg:justify-start text-left"
-                >
-                  <div className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                  <span className="text-sm sm:text-base text-foreground leading-relaxed">
-                    {bullet}
-                  </span>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="flex justify-center"
-          >
-            <MetronomeMock />
-          </motion.div>
-        </div>
-      </div>
-    </section>
+    <>
+      <AnimatedButton href={ANDROID_URL} size="lg" variant="primary" className={widthClass} external>
+        <Icon className="w-5 h-5 shrink-0" />
+        <span className="ml-2">Download for Android</span>
+      </AnimatedButton>
+      <AnimatedButton href={IOS_URL} size="lg" variant="secondary" className={widthClass} external>
+        <Icon className="w-5 h-5 shrink-0" />
+        <span className="ml-2">Download for iOS</span>
+      </AnimatedButton>
+    </>
   )
 }
 
 function MetronomeMock() {
   // TODO: swap for real metronome screenshot when captured
+  const [ref, inView] = useInView({ threshold: 0.3 })
+  const reduceMotion = useReducedMotion()
+  const animate = inView && !reduceMotion
   const bpm = 140
   const beats = [0, 1, 2, 3]
+
   return (
-    <div className="relative w-full max-w-[420px]">
+    <div ref={ref} className="relative w-full max-w-[420px]">
       <motion.div
-        animate={{ scale: [1, 1.03, 1], opacity: [0.4, 0.7, 0.4] }}
+        animate={animate ? { scale: [1, 1.03, 1], opacity: [0.4, 0.7, 0.4] } : undefined}
         transition={{ duration: 4, repeat: Infinity }}
         className="absolute -inset-6 bg-gradient-to-r from-primary-light/30 to-accent-vibrant/30 rounded-[2rem] blur-2xl"
       />
@@ -481,21 +487,25 @@ function MetronomeMock() {
           {beats.map((i) => (
             <motion.div
               key={i}
-              animate={{
-                scale: [1, 1.25, 1],
-                backgroundColor: [
-                  'rgba(82, 101, 38, 0.25)',
-                  i === 0 ? '#8FD14F' : '#526526',
-                  'rgba(82, 101, 38, 0.25)',
-                ],
-              }}
+              animate={
+                animate
+                  ? {
+                      scale: [1, 1.25, 1],
+                      backgroundColor: [
+                        'rgba(82, 101, 38, 0.25)',
+                        i === 0 ? '#8FD14F' : '#526526',
+                        'rgba(82, 101, 38, 0.25)',
+                      ],
+                    }
+                  : undefined
+              }
               transition={{
                 duration: (60 / bpm) * 4,
                 repeat: Infinity,
                 delay: (60 / bpm) * i,
                 times: [0, 0.1, 1],
               }}
-              className="flex-1 h-3 rounded-full"
+              className="flex-1 h-3 rounded-full bg-primary-light/30"
             />
           ))}
         </div>
@@ -518,7 +528,6 @@ function MetronomeMock() {
   )
 }
 
-// YOUR BEATS STAY YOURS
 function PrivacySection() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
@@ -560,25 +569,7 @@ function Badge({ children }: { children: React.ReactNode }) {
   )
 }
 
-// Testimonials
 function TestimonialsSection() {
-  const testimonials = [
-    {
-      quote: "I'm way more organized with my stuff now.",
-      author: 'Beatboxer',
-    },
-    {
-      quote:
-        "Mate you have no idea how much it will change me and mostly my beginner beatbox friends who also want to beatbox in the high levels.",
-      author: 'Community Member',
-    },
-    {
-      quote:
-        'If you are a Beatboxer who wants to progress and prepare for battle, show etc. this is the perfect app. A must for every Beatboxer.',
-      author: 'Beatboxer',
-    },
-  ]
-
   return (
     <div className="space-y-8">
       <div className="text-center">
@@ -642,45 +633,7 @@ function TestimonialCard({
   )
 }
 
-// FAQ
 function FAQSection() {
-  const faqs = [
-    {
-      question: 'How is Beatboxx different from Voice Memos?',
-      answer:
-        "Built for how beatboxers actually work. Auto-detect BPM, tag by technique, search combinations like 'technical + trap,' build routines, prep battle rounds.",
-    },
-    {
-      question: 'Does it detect BPM automatically?',
-      answer:
-        'Yes. 70–200 BPM with harmonic matching. Re-detects after you trim. Tap-tempo if you want to set it yourself.',
-    },
-    {
-      question: 'Is there a built-in metronome?',
-      answer:
-        'Yes. 40–240 BPM, time signatures from 2/4 to 20/4, tap-tempo, visual and audible beat.',
-    },
-    {
-      question: 'Is Beatboxx free?',
-      answer: 'Yes. No ads, no premium tier. Free on iOS and Android.',
-    },
-    {
-      question: 'Is my stuff private?',
-      answer:
-        'Everything stays on your device. No cloud uploads, no accounts, no data collection. Full library export and restore via ZIP packages — nothing ever touches our servers.',
-    },
-    {
-      question: 'Can I import existing voice memos?',
-      answer:
-        'Yes. Import from Voice Memos or Files — M4A, MP3, AAC, WAV, FLAC, and more. Tag, search, and drop them into routines.',
-    },
-    {
-      question: 'How do I prep for different battle stages?',
-      answer:
-        'Battle Prep Mode has a dedicated workspace. Organize material by round (Elim → Quarter → Semi → Final), add alternates, quick-listen to any section, walk on stage knowing your set cold.',
-    },
-  ]
-
   return (
     <div className="space-y-8">
       <div className="text-center">
@@ -774,7 +727,6 @@ function FAQItem({
   )
 }
 
-// Final CTA
 function FinalCTA() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
@@ -788,37 +740,19 @@ function FinalCTA() {
     >
       <div className="p-8 sm:p-12 lg:p-16 rounded-3xl bg-gradient-to-br from-primary-light/20 to-accent-vibrant/20 border border-primary-light/30 backdrop-blur-sm">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-semibold mb-6 leading-snug max-w-3xl mx-auto">
-          Beatboxx won&apos;t make you a better beatboxer. Practice will. But it&apos;ll make sure you never lose your best ideas — and that when battle day comes, you&apos;re ready.
+          Beatboxx won&rsquo;t make you a better beatboxer. Practice will. But it&rsquo;ll make sure you never lose your best ideas — and that when battle day comes, you&rsquo;re ready.
         </h2>
         <p className="text-base sm:text-lg text-muted-foreground mb-8">
-          Download it. It&apos;s free.
+          Download it. It&rsquo;s free.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-          <AnimatedButton
-            href="https://play.google.com/store/apps/details?id=com.johannes.beatboxx"
-            size="lg"
-            variant="primary"
-            external
-          >
-            <Smartphone className="w-5 h-5 shrink-0 align-middle" />
-            <span className="ml-2">Download for Android</span>
-          </AnimatedButton>
-          <AnimatedButton
-            href="https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714"
-            size="lg"
-            variant="secondary"
-            external
-          >
-            <Smartphone className="w-5 h-5 shrink-0 align-middle" />
-            <span className="ml-2">Download for iOS</span>
-          </AnimatedButton>
+          <DownloadButtons icon={Smartphone} />
         </div>
       </div>
     </motion.div>
   )
 }
 
-// Footer
 function Footer() {
   return (
     <footer className="py-12 px-4 sm:px-6 lg:px-8 border-t border-border-light">
