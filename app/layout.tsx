@@ -1,34 +1,62 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
+import { SITE_URL } from '@/lib/blog'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
 })
 
-const spaceGrotesk = Space_Grotesk({ 
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk',
+  display: 'swap',
 })
 
+const SITE_TITLE = 'Beatboxx — Beatbox Recorder App. Record, tag, battle.'
+const SITE_DESCRIPTION =
+  'Beatboxx is the beatbox recorder app built by a beatboxer. Capture ideas, auto-detect BPM, tag techniques, build routines and prep for battles. 100% on-device. Free on iOS and Android.'
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://beatboxx.app'),
-  title: 'Beatboxx — Built by a beatboxer. Record, tag, battle.',
-  description: 'Record ideas, build routines, prep for battles. BPM auto-detect, metronome, waveform scrubbing, smart tagging. 100% on-device. Free on iOS and Android.',
-  keywords: ['beatbox', 'beatboxing', 'music', 'recording', 'organizer', 'battle', 'routine', 'iOS', 'Android', 'metronome', 'BPM detection', 'waveform', 'tap tempo', 'battle prep', 'routine builder', 'on-device', 'offline'],
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: '/',
+  },
+  keywords: [
+    'beatbox recorder app',
+    'beatbox app',
+    'beatboxing app',
+    'beatbox',
+    'beatboxing',
+    'music recording',
+    'voice memo organizer',
+    'battle prep',
+    'routine builder',
+    'metronome',
+    'BPM detection',
+    'waveform',
+    'tap tempo',
+    'on-device',
+    'offline',
+    'iOS',
+    'Android',
+  ],
   authors: [{ name: 'Beatboxx Team' }],
   openGraph: {
-    title: 'Beatboxx — Built by a beatboxer. Record, tag, battle.',
-    description: 'Record ideas, build routines, prep for battles. BPM auto-detect, metronome, waveform scrubbing, smart tagging. 100% on-device.',
-    url: 'https://beatboxx.app',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
     siteName: 'Beatboxx',
     images: [
       {
         url: '/og.png',
         width: 1200,
         height: 630,
-        alt: 'Beatboxx App',
+        alt: 'Beatboxx — beatbox recorder app',
       },
     ],
     locale: 'en_US',
@@ -36,8 +64,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Beatboxx — Built by a beatboxer. Record, tag, battle.',
-    description: 'Record ideas, build routines, prep for battles. BPM auto-detect, metronome, smart tagging. 100% on-device.',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ['/og.png'],
   },
   robots: {
@@ -65,6 +93,57 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F5F3E6' },
+    { media: '(prefers-color-scheme: dark)', color: '#0A0A0A' },
+  ],
+}
+
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE_URL}#organization`,
+  name: 'Beatboxx',
+  url: SITE_URL,
+  logo: `${SITE_URL}/icon.png`,
+  sameAs: ['https://www.instagram.com/beatboxxapp/'],
+}
+
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}#website`,
+  url: SITE_URL,
+  name: 'Beatboxx',
+  description: SITE_DESCRIPTION,
+  publisher: { '@id': `${SITE_URL}#organization` },
+  inLanguage: 'en-US',
+}
+
+const mobileAppLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  '@id': `${SITE_URL}#app`,
+  name: 'Beatboxx — Beatbox Recorder & Organizer',
+  description: SITE_DESCRIPTION,
+  operatingSystem: 'iOS, Android',
+  applicationCategory: 'MusicApplication',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  downloadUrl: [
+    'https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714',
+    'https://play.google.com/store/apps/details?id=com.johannes.beatboxx',
+  ],
+  publisher: { '@id': `${SITE_URL}#organization` },
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -73,9 +152,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans antialiased min-h-screen">
-        <div className="relative">
-          {children}
-        </div>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([organizationLd, websiteLd, mobileAppLd]),
+          }}
+        />
+        <div className="relative">{children}</div>
       </body>
     </html>
   )

@@ -103,6 +103,19 @@ const faqs = [
   },
 ]
 
+const faqPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.answer,
+    },
+  })),
+}
+
 export default function HomePage() {
   const { scrollY } = useScroll()
   const y1 = useTransform(scrollY, [0, 300], [0, 50])
@@ -111,6 +124,10 @@ export default function HomePage() {
 
   return (
     <main className="overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageLd) }}
+      />
       <AnnouncementBar />
       <MobileNav />
       <FloatingCTA />
@@ -303,7 +320,7 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-2xl sm:text-3xl lg:text-4xl font-display font-semibold leading-snug"
           >
-            The only app designed around how beatboxers actually work.
+            The beatbox recorder app designed around how beatboxers actually work.
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

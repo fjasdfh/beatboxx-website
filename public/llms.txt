@@ -1,0 +1,37 @@
+# Beatboxx
+
+> Beatboxx is a free beatbox recorder app for iOS and Android, built by a beatboxer. Record ideas, auto-detect BPM, tag techniques, build routines, and prep for battles. Everything stays on-device — no accounts, no cloud, no tracking.
+
+## About
+
+- Platforms: iOS, Android
+- Price: Free. No ads. No premium tier.
+- Privacy: 100% on-device. ZIP export/restore. No cloud uploads, no accounts, no tracking.
+- Built by: a beatboxer, for beatboxers.
+
+## Core features
+
+- Recording: high-quality audio capture purpose-built for beatbox.
+- BPM auto-detection: 70–200 BPM with harmonic matching, re-detects after trimming.
+- Metronome: 40–240 BPM, time signatures 2/4 to 20/4, tap-tempo, visual + audible beat.
+- Smart tagging: tag by technique; search combinations like "technical + trap".
+- Waveform scrubbing: precise navigation through recordings.
+- Routine builder: assemble drops into routines and prep for battle rounds.
+- Import: M4A, MP3, AAC, WAV, FLAC and more from Voice Memos or Files.
+- Backup: full library export/restore via ZIP packages.
+
+## Key pages
+
+- Home: https://beatboxx.app/
+- Blog: https://beatboxx.app/blog
+- Privacy policy: https://beatboxx.app/privacy
+- Terms of use: https://beatboxx.app/terms
+
+## Downloads
+
+- iOS (App Store): https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714
+- Android (Google Play): https://play.google.com/store/apps/details?id=com.johannes.beatboxx
+
+## Contact
+
+- Instagram: https://www.instagram.com/beatboxxapp/
