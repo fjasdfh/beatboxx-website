@@ -11,8 +11,9 @@ function renderCell(value: string | boolean | undefined) {
 export default function CompareTable({ data }: { data: CompareData }) {
   if (!data || !data.columns.length) return null
   return (
-    <div className="not-prose my-10 overflow-x-auto rounded-2xl border border-border-light bg-background/60">
-      <table className="w-full min-w-[560px] text-left">
+    <div className="not-prose my-10 relative rounded-2xl border border-border-light bg-background/60">
+      <div className="overflow-x-auto rounded-2xl">
+        <table className="w-full min-w-[560px] text-left">
         <thead className="bg-primary-light/20 border-b border-border-light">
           <tr>
             <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-primary">Feature</th>
@@ -38,7 +39,12 @@ export default function CompareTable({ data }: { data: CompareData }) {
             </tr>
           ))}
         </tbody>
-      </table>
+        </table>
+      </div>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-0 w-10 rounded-r-2xl bg-gradient-to-l from-background/90 to-transparent sm:hidden"
+      />
     </div>
   )
 }

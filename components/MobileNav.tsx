@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Download, Instagram, ChevronRight, Music, Home, Info, Shield, Mail, BookOpen } from 'lucide-react'
+import { Menu, X, Download, Instagram, ChevronRight, Music, Home, Shield, Mail, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import { useScrolled } from '@/hooks/useScrolled'
 
@@ -43,7 +43,6 @@ export default function MobileNav() {
 
   const menuItems = [
     { icon: Home, label: 'Home', href: '/' },
-    { icon: Info, label: 'Features', href: '/#features' },
     { icon: BookOpen, label: 'Blog', href: '/blog' },
     { icon: Shield, label: 'Privacy', href: '/privacy' },
     { icon: Mail, label: 'Contact', href: 'mailto:dev.apollonbeatbox@gmail.com' }
@@ -55,14 +54,68 @@ export default function MobileNav() {
 
   return (
     <>
+      {/* Desktop Header */}
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className={`hidden md:block sticky top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-background/80 backdrop-blur-xl shadow-sm border-b border-border-light/50'
+            : 'bg-background/60 backdrop-blur-md'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 py-4">
+          <Link href="/" className="flex items-center gap-2">
+            <Music className="w-6 h-6 text-primary" />
+            <span className="font-display font-bold text-xl">Beatboxx</span>
+          </Link>
+
+          <nav className="flex items-center gap-6 lg:gap-8">
+            <a
+              href="/#capture"
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            >
+              Features
+            </a>
+            <Link
+              href="/blog"
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/privacy"
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            >
+              Privacy
+            </Link>
+            <a
+              href="mailto:dev.apollonbeatbox@gmail.com"
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            >
+              Contact
+            </a>
+            <a
+              href="https://apps.apple.com/de/app/beatboxx-recorder-organizer/id6751503714"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-primary text-white px-4 py-2 text-sm font-medium shadow-sm hover:bg-primary-dark transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              Download
+            </a>
+          </nav>
+        </div>
+      </motion.header>
+
       {/* Mobile Header Bar */}
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 md:hidden transition-all duration-300 ${
-          scrolled 
-            ? 'bg-background/80 backdrop-blur-xl shadow-lg' 
-            : 'bg-transparent'
+        className={`sticky top-0 z-50 md:hidden transition-all duration-300 ${
+          scrolled
+            ? 'bg-background/80 backdrop-blur-xl shadow-lg'
+            : 'bg-background/60 backdrop-blur-md'
         }`}
       >
         <div className="flex items-center justify-between px-4 py-4">
@@ -75,10 +128,10 @@ export default function MobileNav() {
           {/* Menu Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`relative w-10 h-10 rounded-full flex items-center justify-center transition-all ${
-              scrolled 
-                ? 'bg-primary-light/20 hover:bg-primary-light/30' 
-                : 'bg-white/10 hover:bg-white/20'
+            className={`relative w-11 h-11 rounded-full flex items-center justify-center transition-all ${
+              scrolled
+                ? 'bg-primary-light/20 hover:bg-primary-light/30'
+                : 'bg-primary-light/20 hover:bg-primary-light/30'
             }`}
             aria-label="Toggle menu"
           >

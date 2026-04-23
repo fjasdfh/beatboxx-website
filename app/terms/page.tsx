@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { FileText, CheckCircle, Info, AlertCircle, Users, Heart, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
+import MobileNav from '@/components/MobileNav'
 
 export default function TermsPage() {
   const fadeInUp = {
@@ -16,6 +17,8 @@ export default function TermsPage() {
   }
 
   return (
+    <>
+    <MobileNav />
     <main className="min-h-screen px-4 sm:px-6 lg:px-8 py-12">
       {/* Back to home link */}
       <div className="max-w-4xl mx-auto mb-8">
@@ -192,6 +195,7 @@ export default function TermsPage() {
         </div>
       </motion.div>
     </main>
+    </>
   )
 }
 

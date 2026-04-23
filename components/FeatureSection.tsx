@@ -60,14 +60,14 @@ export default function FeatureSection({
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
               {body}
             </p>
-            <ul className="space-y-3 pt-2">
+            <ul className="space-y-3 pt-2 inline-block text-left lg:block">
               {bullets.map((bullet, i) => (
                 <motion.li
                   key={bullet}
                   initial={{ opacity: 0, x: reversed ? 20 : -20 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
-                  className="flex items-start gap-3 justify-center lg:justify-start text-left"
+                  className="flex items-start gap-3"
                 >
                   <div className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                   <span className="text-sm sm:text-base text-foreground leading-relaxed">

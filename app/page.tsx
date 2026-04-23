@@ -123,7 +123,7 @@ export default function HomePage() {
   const opacity = useTransform(scrollY, [0, 300], [1, 0.5])
 
   return (
-    <main className="overflow-hidden">
+    <main className="overflow-x-clip">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageLd) }}
@@ -147,7 +147,7 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto text-center pt-20 md:pt-0">
+        <div className="relative z-10 max-w-6xl mx-auto text-center">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -764,7 +764,7 @@ function FinalCTA() {
           Download it. It&rsquo;s free.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-          <DownloadButtons icon={Smartphone} />
+          <DownloadButtons icon={Smartphone} fullWidthOnMobile />
         </div>
       </div>
     </motion.div>

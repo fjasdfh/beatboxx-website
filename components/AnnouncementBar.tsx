@@ -36,7 +36,7 @@ export default function AnnouncementBar() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center gap-3">
             <Sparkles className="w-4 h-4 shrink-0 hidden sm:block" />
-            <p className="flex-1 text-xs sm:text-sm font-medium truncate">
+            <p className="flex-1 text-xs sm:text-sm font-medium leading-snug">
               <span className="hidden sm:inline">New in v2.1.1 — </span>
               <span className="sm:hidden">New — </span>
               BPM auto-detect, tap tempo, favorites, drag between routines

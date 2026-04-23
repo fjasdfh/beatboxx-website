@@ -4,18 +4,21 @@ import { motion } from 'framer-motion'
 import { Shield, Lock, Eye, Server, Cookie, Mail, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
+import MobileNav from '@/components/MobileNav'
 
 export default function PrivacyPage() {
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.6, ease: "easeOut" }
     }
   }
 
   return (
+    <>
+    <MobileNav />
     <main className="min-h-screen px-4 sm:px-6 lg:px-8 py-12">
       {/* Back to home link */}
       <div className="max-w-4xl mx-auto mb-8">
@@ -150,6 +153,7 @@ export default function PrivacyPage() {
         </div>
       </motion.div>
     </main>
+    </>
   )
 }
 
